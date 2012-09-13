@@ -19,8 +19,8 @@ import java.net.URL;
 public class FileProvider extends ContentProvider {
 
     //Make this false to pick from local file
-    private static final boolean NETWORK = false;
-
+    private static final boolean NETWORK = true;
+    private static final String REMOTE_ADDR =  "http://107.108.57.41/logs/wallpaper_01.jpg";
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
@@ -61,7 +61,7 @@ public class FileProvider extends ContentProvider {
 
         try {
             if (NETWORK) {
-                URL url = new URL("http://107.108.57.41/logs/wallpaper_01.jpg");
+                URL url = new URL(REMOTE_ADDR);
                 NetTransferPipe tp = new NetTransferPipe();
                 tp.go(url);
                 return tp.getReadFd();
